@@ -1,0 +1,650 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Burgers}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{code-for-1-d-inviscid-burgers-experiment}{%
+\section{Code for 1-D Inviscid Burgers
+Experiment}\label{code-for-1-d-inviscid-burgers-experiment}}
+
+    This notebook compares the methods of Active Subspaces and Active
+Manifolds for the approximation of scalar functions which depend on
+solution of the 1-D Inviscid Burgers equation:
+
+\[ \begin{align}\label{eq:mainsystem}
+\begin{split}
+    w_t + \frac{1}{2}\left(w^2\right)_x &= 0.02e^{\mu_2 x}, \\
+    w(0, t, \bf{\mu}) &= \mu_1, \\
+    w(x,0,\bf{\mu}) &= 1.
+\end{split}
+\end{align} \]
+
+In particular, the quantities of interest are
+
+\[ \begin{align*}
+    Q_2(t, \mu) &= \frac{1}{2}\int_0^t \int_0^{100} w(x,\tau,\mu)^2 \,dx\,d\tau, \\
+    Q_3(t,\mu) &= \frac{1}{2}\int_0^t w(100,\tau,\mu)^2\,d\tau,
+\end{align*} \]
+
+where
+\((t, \mu_1, \mu_2) \in [25, 45] \times [4.25, 5.5] \times [0.015, 0.03]\)
+and \(x\in [0,100]\). The goal is to use sample values of \(Q_2, Q_3\)
+obtained from simulations of the above IVP to train an approximation to
+these functions at any \((t, \mu)\) in parameter space.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} Import packages and point to installation of burgers.py, numethod.py, and the AS module.}
+         \PY{c+c1}{\PYZsh{} (You will have to adjust this for your installation.)}
+         
+         \PY{k+kn}{import} \PY{n+nn}{sys}
+         \PY{n}{sys}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/Users/anthonygruber/Desktop/Projects/AMv2/}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k+kn}{import} \PY{n}{preprocessing}
+         \PY{k+kn}{import} \PY{n+nn}{numethod} \PY{k+kn}{as} \PY{n+nn}{nm}
+         \PY{k+kn}{import} \PY{n+nn}{burgers} \PY{k+kn}{as} \PY{n+nn}{bg}
+         \PY{k+kn}{import} \PY{n+nn}{active\PYZus{}subspaces} \PY{k+kn}{as} \PY{n+nn}{ac}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+
+
+    Create and preprocess initial mesh data
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} Number of Samples (Use 6 or 7, using 6 omits the 1000 point data set)}
+         \PY{n}{num} \PY{o}{=} \PY{l+m+mi}{7}
+         
+         \PY{c+c1}{\PYZsh{} Initial mesh data}
+         \PY{n}{points} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)} \PY{c+c1}{\PYZsh{} for reproducibility}
+         \PY{n}{points}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)} \PY{p}{)}
+         \PY{n}{points}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{500}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)} \PY{p}{)}
+         \PY{n}{points}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)} \PY{p}{)}
+         \PY{n}{points}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)} \PY{p}{)}
+         \PY{n}{points}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)} \PY{p}{)}
+         \PY{n}{points}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{25}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)} \PY{p}{)}
+         \PY{n}{points}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)} \PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Upper and Lower bounds for parameters, taken from Carlberg paper}
+         \PY{n}{UBs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(} \PY{p}{[}\PY{l+m+mi}{45}\PY{p}{,} \PY{l+m+mf}{5.5}\PY{p}{,} \PY{l+m+mf}{0.03}\PY{p}{]} \PY{p}{)}
+         \PY{n}{LBs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(} \PY{p}{[}\PY{l+m+mi}{25}\PY{p}{,} \PY{l+m+mf}{4.25}\PY{p}{,} \PY{l+m+mf}{0.015}\PY{p}{]} \PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Linear scaling to appropriate range}
+         \PY{n}{nuPoints} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{points}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num}\PY{p}{)}\PY{p}{:}
+           \PY{n}{nuPoints}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{LBs} \PY{o}{+} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{p}{(}\PY{n}{UBs} \PY{o}{\PYZhy{}} \PY{n}{LBs}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{+} \PY{n}{points}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    Sample and collect the values of \(Q_2, Q_3\) and their gradients. Note
+that \(Q_3\) is ``QthrA'' in code.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} Sample Q and gradQ values over parameter space}
+         \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{points}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num}\PY{p}{)}\PY{p}{:}
+           \PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n+nb}{map}\PY{p}{(} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{bg}\PY{o}{.}\PY{n}{burgers}\PY{p}{(} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{256}\PY{p}{,} \PY{l+m+mi}{2000}\PY{p}{,} \PY{n}{nuPoints}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{x}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{nuPoints}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{x}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{,}
+             \PY{n+nb+bp}{False}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(} \PY{n+nb}{len}\PY{p}{(}\PY{n}{nuPoints}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{p}{)} \PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Separate data appropriately}
+         \PY{n}{Qtwo} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{points}\PY{p}{)}
+         \PY{n}{QthrA} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{points}\PY{p}{)}
+         \PY{n}{gradQtwo} \PY{o}{=} \PY{p}{[} \PY{p}{[} \PY{l+m+mi}{0} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)} \PY{p}{]} \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(} \PY{n+nb}{len}\PY{p}{(}\PY{n}{points}\PY{p}{)} \PY{p}{)} \PY{p}{]}
+         \PY{n}{gradQthrA} \PY{o}{=} \PY{p}{[} \PY{p}{[} \PY{l+m+mi}{0} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)} \PY{p}{]} \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(} \PY{n+nb}{len}\PY{p}{(}\PY{n}{points}\PY{p}{)} \PY{p}{)} \PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num}\PY{p}{)}\PY{p}{:}
+           \PY{n}{Qtwo}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(} \PY{p}{[} \PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{p}{)} \PY{p}{]} \PY{p}{)}
+           \PY{n}{gradQtwo}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{p}{[} \PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{p}{)} \PY{p}{]}
+           \PY{n}{QthrA}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(} \PY{p}{[} \PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{p}{)} \PY{p}{]} \PY{p}{)}
+           \PY{n}{gradQthrA}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{p}{[} \PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{p}{)} \PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Chain rule to get appropriate gradients in [\PYZhy{}1,1]\PYZca{}3}
+         \PY{n}{nuGradsTwo} \PY{o}{=} \PY{p}{[} \PY{p}{[} \PY{l+m+mi}{0} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)} \PY{p}{]} \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(} \PY{n+nb}{len}\PY{p}{(}\PY{n}{points}\PY{p}{)} \PY{p}{)} \PY{p}{]}
+         \PY{n}{nuGradsThrA} \PY{o}{=} \PY{p}{[} \PY{p}{[} \PY{l+m+mi}{0} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)} \PY{p}{]} \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(} \PY{n+nb}{len}\PY{p}{(}\PY{n}{points}\PY{p}{)} \PY{p}{)} \PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num}\PY{p}{)}\PY{p}{:}
+           \PY{n}{nuGradsTwo}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{p}{(}\PY{n}{UBs} \PY{o}{\PYZhy{}} \PY{n}{LBs}\PY{p}{)} \PY{o}{*} \PY{n}{gradQtwo}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+           \PY{n}{nuGradsThrA}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{p}{(}\PY{n}{UBs} \PY{o}{\PYZhy{}} \PY{n}{LBs}\PY{p}{)} \PY{o}{*} \PY{n}{gradQthrA}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+\end{Verbatim}
+
+
+    \hypertarget{comparison-on-q_2}{%
+\subsection{\texorpdfstring{Comparison on
+\(Q_2\)}{Comparison on Q\_2}}\label{comparison-on-q_2}}
+
+Results are given in blocks, first AM then AS.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} Main routine comparing AM and AS \PYZhy{}\PYZhy{} first on Q2. }
+         \PY{c+c1}{\PYZsh{} Fourth input to nm.subspEx gives dimension of AS \PYZhy{}\PYZhy{} this can be tweaked.}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num}\PY{p}{)}\PY{p}{:}
+             \PY{n}{nm}\PY{o}{.}\PY{n}{mainRandEx\PYZus{}old}\PY{p}{(} \PY{n}{points}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{Qtwo}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{nuGradsTwo}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{nm}\PY{o}{.}\PY{n}{get\PYZus{}random\PYZus{}init\PYZus{}pt}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb+bp}{False} \PY{p}{)}
+             \PY{n}{nm}\PY{o}{.}\PY{n}{subspEx}\PY{p}{(} \PY{n}{points}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{Qtwo}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{nuGradsTwo}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{n+nb+bp}{False} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The Average L1 Error is 120.704493 or 0.654658\%
+The Average L2 Error is 98.605473 or 0.746433\%
+The dimension of the Active Subspace is 2
+The Average L1 Error is 569.994971 or 3.091450\%
+The Average L2 Error is 530.690403 or 4.017273\%
+
+The Average L1 Error is 266.985879 or 0.836447\%
+The Average L2 Error is 175.530616 or 1.171768\%
+The dimension of the Active Subspace is 2
+The Average L1 Error is 367.160089 or 1.150285\%
+The Average L2 Error is 221.909562 or 1.481374\%
+
+The Average L1 Error is 69.233743 or 0.189281\%
+The Average L2 Error is 26.424284 or 0.224345\%
+The dimension of the Active Subspace is 2
+The Average L1 Error is 208.550136 or 0.570163\%
+The Average L2 Error is 81.489442 or 0.691853\%
+
+The Average L1 Error is 71.326560 or 0.238229\%
+The Average L2 Error is 23.154258 or 0.329978\%
+The dimension of the Active Subspace is 2
+The Average L1 Error is 175.369363 or 0.585729\%
+The Average L2 Error is 49.409127 or 0.704143\%
+
+The Average L1 Error is 40.379974 or 0.136798\%
+The Average L2 Error is 9.272815 or 0.189257\%
+The dimension of the Active Subspace is 2
+The Average L1 Error is 184.526350 or 0.625134\%
+The Average L2 Error is 35.346229 or 0.721412\%
+
+The Average L1 Error is 29.826534 or 0.102914\%
+The Average L2 Error is 4.516735 or 0.147790\%
+The dimension of the Active Subspace is 2
+The Average L1 Error is 163.857292 or 0.565375\%
+The Average L2 Error is 19.566061 or 0.640213\%
+
+The Average L1 Error is 15.160049 or 0.051411\%
+The Average L2 Error is 1.623203 or 0.074446\%
+The dimension of the Active Subspace is 2
+The Average L1 Error is 189.198219 or 0.641614\%
+The Average L2 Error is 16.886571 or 0.774481\%
+
+
+    \end{Verbatim}
+
+    Visualization of AM and 1-dimensional AS for 500 point data set. First
+AS plot is magnitude of eigenvalues.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{nm}\PY{o}{.}\PY{n}{mainRandEx\PYZus{}old}\PY{p}{(} \PY{n}{points}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{n}{Qtwo}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{n}{nuGradsTwo}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{nm}\PY{o}{.}\PY{n}{get\PYZus{}random\PYZus{}init\PYZus{}pt}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{0} \PY{p}{)}
+         \PY{n}{nm}\PY{o}{.}\PY{n}{subspEx}\PY{p}{(} \PY{n}{points}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{n}{Qtwo}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{n}{nuGradsTwo}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.2} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The Average L1 Error is 29.826534 or 0.102914\%
+The Average L2 Error is 4.516735 or 0.147790\%
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+The dimension of the Active Subspace is 1
+The Average L1 Error is 493.166733 or 1.701627\%
+The Average L2 Error is 59.381075 or 1.942984\%
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Visualization of Sensitivities along the AM.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} Derivative plot}
+         \PY{n}{am}\PY{p}{,} \PY{n}{fvals} \PY{o}{=} \PY{n}{nm}\PY{o}{.}\PY{n}{build\PYZus{}AM\PYZus{}from\PYZus{}data}\PY{p}{(} \PY{n}{nm}\PY{o}{.}\PY{n}{get\PYZus{}random\PYZus{}init\PYZus{}pt}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{points}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{n}{Qtwo}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{n}{nuGradsTwo}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{)}
+         \PY{n}{numpts} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{am}\PY{p}{)}
+         \PY{n}{sValues} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.}\PY{p}{,} \PY{n}{numpts}\PY{p}{,} \PY{n}{numpts}\PY{p}{)} \PY{o}{/} \PY{n}{numpts}
+         \PY{n}{fig}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Coordinate Derivatives Along \PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{gamma\PYZus{}2(t)\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{13}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Curve Parameter: \PYZdl{}t\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{13}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{sValues}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{gradient}\PY{p}{(}\PY{n}{am}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}66c2a5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}|Q\PYZus{}T|\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{sValues}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{gradient}\PY{p}{(}\PY{n}{am}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}fc8d62}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}|Q\PYZus{}\PYZob{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{mu1\PYZcb{}|\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{sValues}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{gradient}\PY{p}{(}\PY{n}{am}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}8da0cb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}|Q\PYZus{}\PYZob{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{mu2\PYZcb{}|\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{bbox\PYZus{}to\PYZus{}anchor}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{1.05}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{borderaxespad}\PY{o}{=}\PY{l+m+mf}{0.}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} (0, 1)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{comparison-on-q_3}{%
+\subsection{\texorpdfstring{Comparison on
+\(Q_3\)}{Comparison on Q\_3}}\label{comparison-on-q_3}}
+
+Results are given in blocks, first AM then AS.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{} Main routine comparing AM and AS \PYZhy{}\PYZhy{} now on Q3alt}
+         \PY{c+c1}{\PYZsh{} Fourth input to nm.subspEx gives dimension of AS \PYZhy{}\PYZhy{} this can be tweaked.}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num}\PY{p}{)}\PY{p}{:}
+             \PY{n}{nm}\PY{o}{.}\PY{n}{mainRandEx\PYZus{}old}\PY{p}{(} \PY{n}{points}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{QthrA}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{nuGradsThrA}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{nm}\PY{o}{.}\PY{n}{get\PYZus{}random\PYZus{}init\PYZus{}pt}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb+bp}{False} \PY{p}{)}
+             \PY{n}{nm}\PY{o}{.}\PY{n}{subspEx}\PY{p}{(} \PY{n}{points}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{QthrA}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{nuGradsThrA}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{n+nb+bp}{False} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The Average L1 Error is 1.530759 or 1.258959\%
+The Average L2 Error is 1.275594 or 1.355597\%
+The dimension of the Active Subspace is 2
+The Average L1 Error is 10.018485 or 8.239617\%
+The Average L2 Error is 7.841500 or 8.333306\%
+
+The Average L1 Error is 7.699704 or 2.617042\%
+The Average L2 Error is 4.691501 or 3.064222\%
+The dimension of the Active Subspace is 2
+The Average L1 Error is 13.545275 or 4.603886\%
+The Average L2 Error is 7.614863 or 4.973595\%
+
+The Average L1 Error is 1.787474 or 0.514238\%
+The Average L2 Error is 0.855217 or 0.745659\%
+The dimension of the Active Subspace is 2
+The Average L1 Error is 10.688236 or 3.074898\%
+The Average L2 Error is 3.884366 or 3.386758\%
+
+The Average L1 Error is 3.325705 or 1.253654\%
+The Average L2 Error is 1.392897 or 2.095266\%
+The dimension of the Active Subspace is 2
+The Average L1 Error is 10.289733 or 3.878808\%
+The Average L2 Error is 2.948580 or 4.435402\%
+
+The Average L1 Error is 0.963697 or 0.361867\%
+The Average L2 Error is 0.286659 or 0.612954\%
+The dimension of the Active Subspace is 2
+The Average L1 Error is 7.354229 or 2.761503\%
+The Average L2 Error is 1.732418 or 3.704375\%
+
+The Average L1 Error is 0.700153 or 0.279471\%
+The Average L2 Error is 0.143457 or 0.506059\%
+The dimension of the Active Subspace is 2
+The Average L1 Error is 8.784204 or 3.506276\%
+The Average L2 Error is 1.076029 or 3.795792\%
+
+The Average L1 Error is 0.613020 or 0.236793\%
+The Average L2 Error is 0.132686 or 0.646739\%
+The dimension of the Active Subspace is 2
+The Average L1 Error is 9.077263 or 3.506299\%
+The Average L2 Error is 0.824224 or 4.017432\%
+
+
+    \end{Verbatim}
+
+    Visualization of AM and 1-dimensional AS for 500 point data set. First
+AS plot is magnitude of eigenvalues.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} Visualize the AM and AS for one set \PYZhy{}\PYZhy{} Q3alt}
+         \PY{n}{nm}\PY{o}{.}\PY{n}{mainRandEx\PYZus{}old}\PY{p}{(} \PY{n}{points}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{n}{QthrA}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{n}{nuGradsThrA}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{nm}\PY{o}{.}\PY{n}{get\PYZus{}random\PYZus{}init\PYZus{}pt}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{0} \PY{p}{)}
+         \PY{n}{nm}\PY{o}{.}\PY{n}{subspEx}\PY{p}{(} \PY{n}{points}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{n}{QthrA}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{n}{nuGradsThrA}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.2} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The Average L1 Error is 0.700153 or 0.279471\%
+The Average L2 Error is 0.143457 or 0.506059\%
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+The dimension of the Active Subspace is 1
+The Average L1 Error is 9.880799 or 3.943990\%
+The Average L2 Error is 1.211889 or 4.275052\%
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Visualization of sensitivities along the AM.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} Derivative plot}
+         \PY{n}{am}\PY{p}{,} \PY{n}{fvals} \PY{o}{=} \PY{n}{nm}\PY{o}{.}\PY{n}{build\PYZus{}AM\PYZus{}from\PYZus{}data}\PY{p}{(} \PY{n}{nm}\PY{o}{.}\PY{n}{get\PYZus{}random\PYZus{}init\PYZus{}pt}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{points}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{n}{QthrA}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{n}{nuGradsThrA}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{)}
+         \PY{n}{numpts} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{am}\PY{p}{)}
+         \PY{n}{sValues} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.}\PY{p}{,} \PY{n}{numpts}\PY{p}{,} \PY{n}{numpts}\PY{p}{)} \PY{o}{/} \PY{n}{numpts}
+         \PY{n}{fig}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Coordinate Derivatives Along \PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{gamma\PYZus{}3(t)\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{13}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Curve Parameter: \PYZdl{}t\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{13}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{sValues}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{gradient}\PY{p}{(}\PY{n}{am}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}66c2a5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}|Q\PYZus{}T|\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{sValues}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{gradient}\PY{p}{(}\PY{n}{am}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}fc8d62}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}|Q\PYZus{}\PYZob{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{mu1\PYZcb{}|\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{sValues}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{gradient}\PY{p}{(}\PY{n}{am}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}8da0cb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}|Q\PYZus{}\PYZob{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{mu2\PYZcb{}|\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{bbox\PYZus{}to\PYZus{}anchor}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{1.05}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{borderaxespad}\PY{o}{=}\PY{l+m+mf}{0.}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} (0, 1)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
